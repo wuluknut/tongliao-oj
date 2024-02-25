@@ -17,7 +17,11 @@
 
 package com.wuluknut.tongliaooj.config;
 
+import com.wuluknut.tongliaooj.model.system.Log;
+import com.wuluknut.tongliaooj.model.system.Team;
+import com.wuluknut.tongliaooj.model.system.User;
 import org.springframework.context.annotation.Configuration;
+import xyz.erupt.core.constant.MenuTypeEnum;
 import xyz.erupt.core.module.EruptModule;
 import xyz.erupt.core.module.EruptModuleInvoke;
 import xyz.erupt.core.module.MetaMenu;
@@ -48,6 +52,12 @@ public class EruptConfig implements EruptModule {
     @Override
     public List<MetaMenu> initMenus() {
         List<MetaMenu> menus = new ArrayList<>();
+
+        menus.add(MetaMenu.createRootMenu("$system", "前台系统", "fa fa-tachometer", 2));
+
+        menus.add(MetaMenu.createEruptClassMenu(Log.class, menus.get(0), 0));
+        menus.add(MetaMenu.createEruptClassMenu(Team.class, menus.get(0), 10, MenuTypeEnum.TREE));
+        menus.add(MetaMenu.createEruptClassMenu(User.class, menus.get(0), 20));
 
         return menus;
     }
