@@ -1,6 +1,6 @@
 FROM eclipse-temurin:8u392-b08-jre
 
-ENV TZ=Asia/Shanghai DB_HOST=pgsql REDIS_HOST=redis
+ENV TZ=Asia/Shanghai DB_HOST=pgsql REDIS_HOST=redis JUDGE_HOST=judge0_server
 
 EXPOSE 7000
 EXPOSE 8000
