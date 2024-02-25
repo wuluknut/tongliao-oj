@@ -1,0 +1,41 @@
+server:
+  tomcat:
+    max-http-form-post-size: 50MB
+  compression:
+    enabled: true
+  port: 7000
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+  jackson:
+    time-zone: ${TZ:Asia/Shanghai}
+    default-property-inclusion: non_null
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:172.16.10.50}:${DB_PORT:5432}/${DB_DATABASE:tongliaooj}?currentSchema=web_oj
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  redis:
+    host: ${REDIS_HOST:172.16.10.50}
+    password: ${REDIS_PASSWORD:redis}
+    database: ${REDIS_DATABASE:1}
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath*:db/schema.sql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: web_oj
+    open-in-view: true
+    show-sql: true
+erupt:
+  redis-session: true
+  redis-session-refresh: true
+  upload-path: ${UPLOAD_PATH:/data/upload}
+erupt-app:
+  water-mark: false
+  locales: zh-CN

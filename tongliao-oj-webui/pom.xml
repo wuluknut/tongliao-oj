@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <packaging>pom</packaging>
+  <parent>
+    <groupId>com.wuluknut</groupId>
+    <artifactId>tongliao-oj-parent</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>tongliao-oj-webui</artifactId>
+
+  <properties>
+    <exec.version>3.1.1</exec.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>${exec.version}</version>
+        <executions>
+          <execution>
+            <id>exec-pnpm-install</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>pnpm</executable>
+              <arguments>
+                <argumnet>install</argumnet>
+              </arguments>
+              <workingDirectory>${basedir}</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>exec-pnpm-run-generate</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>pnpm</executable>
+              <arguments>
+                <argumnet>run</argumnet>
+                <argumnet>generate</argumnet>
+              </arguments>
+              <workingDirectory>${basedir}</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

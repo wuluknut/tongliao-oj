@@ -1,0 +1,34 @@
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### Web ###
+# Node dependencies
+node_modules
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/*

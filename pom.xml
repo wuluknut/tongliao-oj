@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>tongliao-oj-webui</module>
+        <module>tongliao-oj-system</module>
+        <module>tongliao-oj-erupt</module>
+    </modules>
+
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.18</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.wuluknut</groupId>
+    <artifactId>tongliao-oj-parent</artifactId>
+    <version>${revision}</version>
+
+    <name>tongliao-oj</name>
+    <description>基于 Java 的高校内网 Online Judge 系统设计与实现</description>
+    <url>https://github.com/wuluknut/tongliao-oj</url>
+
+    <properties>
+        <revision>0.0.0</revision>
+        <tomcat.version>9.0.86</tomcat.version>
+        <logback.version>1.2.13</logback.version>
+        <postgresql.version>42.3.9</postgresql.version>
+        <json-path.version>2.9.0</json-path.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
+        <flatten.version>1.6.0</flatten.version>
+        <java.version>8</java.version>
+        <skipTests>true</skipTests>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten.version}</version>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <developers>
+        <developer>
+            <id>wuluknut</id>
+            <name>Wulu Knut</name>
+            <email>wuluknut@gmail.com</email>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/wuluknut/tongliao-oj</url>
+        <connection>scm:git:git@github.com:wuluknut/tongliao-oj.git</connection>
+        <developerConnection>scm:git:git@github.com:wuluknut/tongliao-oj.git</developerConnection>
+    </scm>
+    <licenses>
+        <license>
+            <name>AGPLv3 License</name>
+            <url>https://opensource.org/license/agpl-v3/</url>
+        </license>
+    </licenses>
+    <inceptionYear>2024</inceptionYear>
+</project>
