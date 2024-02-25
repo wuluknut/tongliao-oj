@@ -20,6 +20,9 @@ spring:
     host: ${REDIS_HOST:172.16.10.50}
     password: ${REDIS_PASSWORD:redis}
     database: ${REDIS_DATABASE:2}
+judge:
+  server:
+    host: ${JUDGE_HOST:172.16.10.50}
 mybatis-flex:
   configuration:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
