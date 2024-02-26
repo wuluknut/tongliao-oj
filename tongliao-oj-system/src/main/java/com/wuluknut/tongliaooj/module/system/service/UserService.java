@@ -26,7 +26,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.wuluknut.tongliaooj.module.system.model.entity.table.UserDOTableDef.USER_D_O;
 
@@ -40,6 +42,8 @@ import static com.wuluknut.tongliaooj.module.system.model.entity.table.UserDOTab
 @RequiredArgsConstructor
 public class UserService extends ServiceImpl<UserMapper, UserDO> implements IService<UserDO>, UserDetailsService {
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDO user = getOne(QueryWrapper.create().where(USER_D_O.USERNAME.eq(username)));
@@ -49,5 +53,10 @@ public class UserService extends ServiceImpl<UserMapper, UserDO> implements ISer
         }
 
         return user;
+    }
+
+    @Transactional
+    public void password(String username, String password) {
+        update(UserDO.builder().password(passwordEncoder.encode(password)).build(), QueryWrapper.create().where(USER_D_O.USERNAME.eq(username)));
     }
 }
