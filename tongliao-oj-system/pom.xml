@@ -13,6 +13,7 @@
     <artifactId>tongliao-oj-system</artifactId>
 
     <properties>
+        <jwt.version>9.37.3</jwt.version>
         <mica.version>2.7.18</mica.version>
         <hutool.version>5.8.26</hutool.version>
         <mybatis-flex.version>1.8.0</mybatis-flex.version>
@@ -50,6 +51,12 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>${jwt.version}</version>
         </dependency>
 
         <dependency>

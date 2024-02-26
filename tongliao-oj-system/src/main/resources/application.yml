@@ -20,6 +20,8 @@ spring:
     host: ${REDIS_HOST:172.16.10.50}
     password: ${REDIS_PASSWORD:redis}
     database: ${REDIS_DATABASE:2}
+jwt:
+  secret: ${JWT_SECRET:818a7697-2769-42d9-b576-548066abf408}
 judge:
   server:
     host: ${JUDGE_HOST:172.16.10.50}
