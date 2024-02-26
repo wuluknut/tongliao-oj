@@ -13,6 +13,8 @@
     <artifactId>tongliao-oj-system</artifactId>
 
     <properties>
+        <mica.version>2.7.18</mica.version>
+        <hutool.version>5.8.26</hutool.version>
         <mybatis-flex.version>1.8.0</mybatis-flex.version>
     </properties>
 
@@ -48,6 +50,23 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.dreamlu</groupId>
+            <artifactId>mica-ip2region</artifactId>
+            <version>${mica.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-http</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
 
         <!--

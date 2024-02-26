@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuluknut.tongliaooj.module.system.mapper.LogMapper">
+    <resultMap id="BaseResultMap" type="com.wuluknut.tongliaooj.module.system.model.entity.LogDO">
+        <!--@mbg.generated-->
+        <!--@Table sys_log-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_agent" jdbcType="VARCHAR" property="userAgent"/>
+        <result column="request_ip" jdbcType="VARCHAR" property="requestIp"/>
+        <result column="time" jdbcType="VARCHAR" property="time"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="param" jdbcType="VARCHAR" property="param"/>
+        <result column="exception" jdbcType="VARCHAR" property="exception"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        "id",
+        "user_agent",
+        "request_ip",
+        "time",
+        "url",
+        "param",
+        "exception",
+        "update_by",
+        "update_time",
+        "create_by",
+        "create_time"
+    </sql>
+</mapper>
