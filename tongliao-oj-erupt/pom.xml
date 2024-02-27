@@ -13,6 +13,7 @@
     <artifactId>tongliao-oj-erupt</artifactId>
 
     <properties>
+        <!-- dependency version -->
         <erupt.version>1.12.10</erupt.version>
     </properties>
 

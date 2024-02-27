@@ -13,6 +13,7 @@
   <artifactId>tongliao-oj-webui</artifactId>
 
   <properties>
+    <!-- plugin version -->
     <exec.version>3.1.1</exec.version>
   </properties>
 

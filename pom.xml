@@ -26,14 +26,19 @@
 
     <properties>
         <revision>0.0.0</revision>
+        <java.version>8</java.version>
+        <skipTests>true</skipTests>
+
+        <!-- plugin version -->
+        <flatten.version>1.6.0</flatten.version>
+
+        <!-- cve fix version -->
+        <json-path.version>2.9.0</json-path.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
         <tomcat.version>9.0.86</tomcat.version>
         <logback.version>1.2.13</logback.version>
         <postgresql.version>42.3.9</postgresql.version>
-        <json-path.version>2.9.0</json-path.version>
-        <snakeyaml.version>2.2</snakeyaml.version>
-        <flatten.version>1.6.0</flatten.version>
-        <java.version>8</java.version>
-        <skipTests>true</skipTests>
+        <spring-framework.version>5.3.32</spring-framework.version>
     </properties>
 
     <dependencies>
