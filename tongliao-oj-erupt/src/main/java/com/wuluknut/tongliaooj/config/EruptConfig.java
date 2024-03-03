@@ -17,10 +17,13 @@
 
 package com.wuluknut.tongliaooj.config;
 
+import com.wuluknut.tongliaooj.model.forum.Comment;
+import com.wuluknut.tongliaooj.model.forum.Discussion;
 import com.wuluknut.tongliaooj.model.system.Log;
 import com.wuluknut.tongliaooj.model.system.Team;
 import com.wuluknut.tongliaooj.model.system.User;
 import org.springframework.context.annotation.Configuration;
+import xyz.erupt.core.constant.MenuStatus;
 import xyz.erupt.core.constant.MenuTypeEnum;
 import xyz.erupt.core.module.EruptModule;
 import xyz.erupt.core.module.EruptModuleInvoke;
@@ -54,10 +57,14 @@ public class EruptConfig implements EruptModule {
         List<MetaMenu> menus = new ArrayList<>();
 
         menus.add(MetaMenu.createRootMenu("$system", "前台系统", "fa fa-tachometer", 2));
+        menus.add(MetaMenu.createRootMenu("$forum", "社区管理", "fa fa-comments", 3));
 
         menus.add(MetaMenu.createEruptClassMenu(Log.class, menus.get(0), 0));
         menus.add(MetaMenu.createEruptClassMenu(Team.class, menus.get(0), 10, MenuTypeEnum.TREE));
         menus.add(MetaMenu.createEruptClassMenu(User.class, menus.get(0), 20));
+
+        menus.add(MetaMenu.createEruptClassMenu(Comment.class, menus.get(1), 10, MenuStatus.HIDE));
+        menus.add(MetaMenu.createEruptClassMenu(Discussion.class, menus.get(1), 0));
 
         return menus;
     }
