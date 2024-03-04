@@ -63,6 +63,7 @@ function logout() {
         <p>姓名：{{ user?.nickname }}</p>
         <p>手机：{{ user?.phone }}</p>
       </div>
+
       <template #footer>
         <div flex items-center justify-end>
           <el-button type="primary" @click="dialog = true">
@@ -74,7 +75,7 @@ function logout() {
         </div>
       </template>
     </el-card>
-    <el-dialog v-model="dialog" title="修改密码" width="400" center>
+    <el-dialog v-model="dialog" width="400" center>
       <el-form ref="formRef" :model="ruleForm" :rules="rules" label-position="top">
         <el-form-item label="旧密码" prop="password">
           <el-input v-model="ruleForm.password" placeholder="旧密码" type="password" show-password />
