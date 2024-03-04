@@ -46,6 +46,28 @@ function logout() {
     ElMessage.success('退出成功！')
   })
 }
+
+const active = ref('forum')
+
+const total = ref(0)
+
+const tableData = ref([{
+  title: 'xxxx',
+  createTime: 'xxxx-xx-xx',
+}])
+
+function page(val: number) {
+  useApiDiscussionList(val, '', true).then((res) => {
+    if (res.data.value.status === 200) {
+      total.value = res.data.value.content.totalPage
+      tableData.value = res.data.value.content.records
+
+      useWindowScroll().y.value = 0
+    }
+  })
+}
+
+page(1)
 </script>
 
 <template>
@@ -75,6 +97,33 @@ function logout() {
         </div>
       </template>
     </el-card>
+    <div m-auto max-w-4xl>
+      <div mt-5>
+        <el-tabs v-model="active" type="border-card">
+          <el-tab-pane label="我的讨论" name="forum">
+            <client-only>
+              <el-table :data="tableData">
+                <el-table-column label="标题">
+                  <template #default="scope">
+                    <el-link :underline="false" @click="useRouter().push(`/forum/${scope.row.id}`)">
+                      {{ scope.row.title }}
+                    </el-link>
+                  </template>
+                </el-table-column>
+                <el-table-column label="发布时间" width="200" align="center">
+                  <template #default="scope">
+                    {{ scope.row.createTime.replace('T', ' ') }}
+                  </template>
+                </el-table-column>
+              </el-table>
+            </client-only>
+            <div mt-5 flex justify-end>
+              <el-pagination v-model:page-count="total" small background layout="prev, pager, next" @update:current-page="page" />
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
     <el-dialog v-model="dialog" width="400" center>
       <el-form ref="formRef" :model="ruleForm" :rules="rules" label-position="top">
         <el-form-item label="旧密码" prop="password">
