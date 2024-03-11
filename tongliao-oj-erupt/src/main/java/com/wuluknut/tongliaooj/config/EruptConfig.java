@@ -17,6 +17,8 @@
 
 package com.wuluknut.tongliaooj.config;
 
+import com.wuluknut.tongliaooj.model.code.Contest;
+import com.wuluknut.tongliaooj.model.code.Problem;
 import com.wuluknut.tongliaooj.model.forum.Comment;
 import com.wuluknut.tongliaooj.model.forum.Discussion;
 import com.wuluknut.tongliaooj.model.system.Log;
@@ -58,6 +60,7 @@ public class EruptConfig implements EruptModule {
 
         menus.add(MetaMenu.createRootMenu("$system", "前台系统", "fa fa-tachometer", 2));
         menus.add(MetaMenu.createRootMenu("$forum", "社区管理", "fa fa-comments", 3));
+        menus.add(MetaMenu.createRootMenu("$code", "评测管理", "fa fa-codepen", 4));
 
         menus.add(MetaMenu.createEruptClassMenu(Log.class, menus.get(0), 0));
         menus.add(MetaMenu.createEruptClassMenu(Team.class, menus.get(0), 10, MenuTypeEnum.TREE));
@@ -65,6 +68,9 @@ public class EruptConfig implements EruptModule {
 
         menus.add(MetaMenu.createEruptClassMenu(Comment.class, menus.get(1), 10, MenuStatus.HIDE));
         menus.add(MetaMenu.createEruptClassMenu(Discussion.class, menus.get(1), 0));
+
+        menus.add(MetaMenu.createEruptClassMenu(Contest.class, menus.get(2), 10));
+        menus.add(MetaMenu.createEruptClassMenu(Problem.class, menus.get(2), 0));
 
         return menus;
     }
