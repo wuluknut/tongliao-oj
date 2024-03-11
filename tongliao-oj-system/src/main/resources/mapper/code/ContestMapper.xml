@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuluknut.tongliaooj.module.code.mapper.ContestMapper">
+    <resultMap id="BaseResultMap" type="com.wuluknut.tongliaooj.module.code.model.ContestDO">
+        <!--@mbg.generated-->
+        <!--@Table tbl_contest-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="stop_time" jdbcType="TIMESTAMP" property="stopTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id,
+        title,
+        stop_time,
+        update_by,
+        update_time,
+        create_by,
+        create_time
+    </sql>
+</mapper>

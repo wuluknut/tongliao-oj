@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuluknut.tongliaooj.module.code.mapper.ProblemMapper">
+    <resultMap id="BaseResultMap" type="com.wuluknut.tongliaooj.module.code.model.ProblemDO">
+        <!--@mbg.generated-->
+        <!--@Table tbl_problem-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="rate" jdbcType="REAL" property="rate"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="declare" jdbcType="VARCHAR" property="declare"/>
+        <result column="language" jdbcType="INTEGER" property="language"/>
+        <result column="question" jdbcType="VARCHAR" property="question"/>
+        <result column="test" jdbcType="VARCHAR" property="test"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        "id",
+        "rate",
+        "title",
+        "declare",
+        "language",
+        "question",
+        "test",
+        "update_by",
+        "update_time",
+        "create_by",
+        "create_time"
+    </sql>
+</mapper>
