@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@vueuse/nuxt',
     'nuxt-module-eslint-config',
+    'nuxt-monaco-editor',
   ],
 
   app: {
@@ -57,6 +58,10 @@ export default defineNuxtConfig({
 
   eslintConfig: {
     setup: false,
+  },
+
+  monacoEditor: {
+    locale: 'zh-hans',
   },
 
   typescript: {
