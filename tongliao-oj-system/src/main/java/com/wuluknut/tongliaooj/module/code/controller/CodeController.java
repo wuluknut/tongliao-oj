@@ -35,7 +35,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import static com.wuluknut.tongliaooj.module.code.model.table.ContestDOTableDef.CONTEST_D_O;
-import static com.wuluknut.tongliaooj.module.forum.model.table.DiscussionDOTableDef.DISCUSSION_D_O;
+import static com.wuluknut.tongliaooj.module.code.model.table.ProblemDOTableDef.PROBLEM_D_O;
 
 /**
  * 评测控制类
@@ -61,7 +61,7 @@ public class CodeController {
     @GetMapping("/problem")
     @PreAuthorize("isAuthenticated()")
     public Page<ProblemDO> list(@RequestParam(defaultValue = "1") Integer page, String keyword) {
-        return problemService.page(new Page<>(page, 10), QueryWrapper.create().where(DISCUSSION_D_O.TITLE.like("%" + keyword + "%").when(StringUtils.hasText(keyword))));
+        return problemService.page(new Page<>(page, 10), QueryWrapper.create().where(PROBLEM_D_O.TITLE.like("%" + keyword + "%").when(StringUtils.hasText(keyword))));
     }
 
     @GetMapping("/problem/info")
