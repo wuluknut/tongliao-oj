@@ -17,10 +17,13 @@
 
 package com.wuluknut.tongliaooj.model.code;
 
+import com.wuluknut.tongliaooj.model.Score;
 import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.Drill;
+import xyz.erupt.annotation.sub_erupt.Link;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
@@ -28,10 +31,9 @@ import xyz.erupt.annotation.sub_field.sub_edit.DateType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.jpa.model.MetaModelVo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * 竞赛管理
@@ -41,7 +43,10 @@ import java.time.LocalDateTime;
  */
 @Table(name = "tbl_contest")
 @Erupt(
-        name = "竞赛管理"
+        name = "竞赛管理",
+        drills = {
+                @Drill(title = "竞赛得分", link = @Link(linkErupt = Score.class, joinColumn = "cid"))
+        }
 )
 @Entity
 @Getter
@@ -67,4 +72,18 @@ public class Contest extends MetaModelVo {
     )
     @Column(nullable = false)
     private LocalDateTime stopTime;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tbl_contest_problem",
+            joinColumns = @JoinColumn(name = "contest_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "problem_id", referencedColumnName = "id")
+    )
+    @EruptField(
+            edit = @Edit(
+                    title = "竞赛题目",
+                    type = EditType.TAB_TABLE_REFER
+            )
+    )
+    private Set<Problem> problems;
 }

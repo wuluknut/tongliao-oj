@@ -17,6 +17,7 @@
 
 package com.wuluknut.tongliaooj.config;
 
+import com.wuluknut.tongliaooj.model.Score;
 import com.wuluknut.tongliaooj.model.code.Contest;
 import com.wuluknut.tongliaooj.model.code.Problem;
 import com.wuluknut.tongliaooj.model.forum.Comment;
@@ -71,6 +72,8 @@ public class EruptConfig implements EruptModule {
 
         menus.add(MetaMenu.createEruptClassMenu(Contest.class, menus.get(2), 10));
         menus.add(MetaMenu.createEruptClassMenu(Problem.class, menus.get(2), 0));
+
+        menus.add(MetaMenu.createEruptClassMenu(Score.class, null, 10, MenuStatus.HIDE));
 
         return menus;
     }

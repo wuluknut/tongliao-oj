@@ -17,10 +17,13 @@
 
 package com.wuluknut.tongliaooj.model.code;
 
+import com.wuluknut.tongliaooj.model.Score;
 import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.Drill;
+import xyz.erupt.annotation.sub_erupt.Link;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
@@ -42,6 +45,9 @@ import javax.persistence.Table;
 @Table(name = "tbl_problem")
 @Erupt(
         name = "问题管理",
+        drills = {
+                @Drill(title = "运行结果", link = @Link(linkErupt = Score.class, joinColumn = "pid"))
+        },
         power = @Power(importable = true)
 )
 @Entity
