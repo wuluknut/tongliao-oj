@@ -11,7 +11,7 @@
     "build": "nuxt build",
     "preview": "nuxt preview",
     "generate": "nuxt generate",
-    "postinstall": "nuxt prepare && pnpx simple-git-hooks",
+    "postinstall": "nuxt prepare && pnpm simple-git-hooks",
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
