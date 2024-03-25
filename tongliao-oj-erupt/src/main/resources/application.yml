@@ -13,11 +13,11 @@ spring:
     time-zone: ${TZ:Asia/Shanghai}
     default-property-inclusion: non_null
   datasource:
-    url: jdbc:postgresql://${DB_HOST:172.16.10.50}:${DB_PORT:5432}/${DB_DATABASE:tongliaooj}?currentSchema=web_oj
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_DATABASE:tongliaooj}?currentSchema=web_oj
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
   redis:
-    host: ${REDIS_HOST:172.16.10.50}
+    host: ${REDIS_HOST:localhost}
     password: ${REDIS_PASSWORD:redis}
     database: ${REDIS_DATABASE:1}
   sql:
