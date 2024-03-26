@@ -46,6 +46,7 @@ import javax.persistence.Table;
 @SQLDelete(sql = "update tbl_score set del_flag = true where id = ?")
 @Erupt(
         name = "运行得分",
+        orderBy = "Score.result desc",
         filter = @Filter("del_flag = false"),
         power = @Power(add = false, edit = false, viewDetails = false, export = true)
 )
