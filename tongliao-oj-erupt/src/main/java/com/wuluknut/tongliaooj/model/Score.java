@@ -57,6 +57,8 @@ public class Score extends MetaModelCreateVo {
     private Long cid;
     private Long pid;
 
+    private String token;
+
     @EruptField(
             views = @View(title = "运行状态", width = "400"),
             edit = @Edit(
