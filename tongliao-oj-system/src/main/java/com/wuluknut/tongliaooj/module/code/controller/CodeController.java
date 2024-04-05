@@ -23,19 +23,22 @@ import com.wuluknut.tongliaooj.module.code.model.ContestDO;
 import com.wuluknut.tongliaooj.module.code.model.ProblemDO;
 import com.wuluknut.tongliaooj.module.code.service.ContestService;
 import com.wuluknut.tongliaooj.module.code.service.ProblemService;
+import com.wuluknut.tongliaooj.module.judge.model.ScoreDO;
+import com.wuluknut.tongliaooj.module.judge.model.dto.JudgeDTO;
+import com.wuluknut.tongliaooj.module.judge.service.JudgeService;
+import com.wuluknut.tongliaooj.module.judge.service.ScoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import static com.wuluknut.tongliaooj.module.code.model.table.ContestDOTableDef.CONTEST_D_O;
 import static com.wuluknut.tongliaooj.module.code.model.table.ProblemDOTableDef.PROBLEM_D_O;
+import static com.wuluknut.tongliaooj.module.judge.model.table.ScoreDOTableDef.SCORE_D_O;
 
 /**
  * 评测控制类
@@ -48,9 +51,13 @@ import static com.wuluknut.tongliaooj.module.code.model.table.ProblemDOTableDef.
 @RequiredArgsConstructor
 public class CodeController {
 
+    private final JudgeService judgeService;
+
     private final ContestService contestService;
 
     private final ProblemService problemService;
+
+    private final ScoreService scoreService;
 
     @GetMapping("/contest")
     @PreAuthorize("isAuthenticated()")
@@ -68,5 +75,39 @@ public class CodeController {
     @PreAuthorize("isAuthenticated()")
     public ProblemDO info(@Valid @NotNull Long id) {
         return problemService.getById(id);
+    }
+
+    @PostMapping("/judge/submit")
+    @PreAuthorize("isAuthenticated()")
+    public String submit(@Valid @NotNull Long id, @Valid @NotBlank String code) {
+        ProblemDO problem = problemService.getById(id);
+
+        String token = judgeService.submit(problem.getLanguage(), code + problem.getTest(), "test");
+
+        ScoreDO score = ScoreDO.builder().pid(problem.getId()).token(token).status(1).code(code).time("none").memory("none").result(0).build();
+
+        scoreService.save(score);
+
+        return token;
+    }
+
+    @GetMapping("/judge/query")
+    @PreAuthorize("isAuthenticated()")
+    public ScoreDO query(String token) {
+        JudgeDTO query = judgeService.query(token);
+
+        ScoreDO score = scoreService.getOne(QueryWrapper.create().where(SCORE_D_O.TOKEN.eq(token)));
+
+        score.setStatus(query.getStatus().getId());
+        score.setMemory(query.getMemory());
+        score.setTime(query.getTime());
+
+        if (query.getStatus().getId().equals(3)) {
+            score.setResult(10000 - (int) (Float.parseFloat(query.getTime()) * 1000) - (Integer.parseInt(query.getMemory()) / 100));
+        }
+
+        scoreService.updateById(score);
+
+        return score;
     }
 }
