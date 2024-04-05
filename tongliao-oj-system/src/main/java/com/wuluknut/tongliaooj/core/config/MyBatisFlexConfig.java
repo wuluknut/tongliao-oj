@@ -20,6 +20,8 @@ package com.wuluknut.tongliaooj.core.config;
 import com.mybatisflex.annotation.InsertListener;
 import com.mybatisflex.annotation.UpdateListener;
 import com.mybatisflex.core.FlexGlobalConfig;
+import com.mybatisflex.core.logicdelete.LogicDeleteManager;
+import com.mybatisflex.core.logicdelete.impl.BooleanLogicDeleteProcessor;
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer;
 import com.wuluknut.tongliaooj.core.model.BaseEntity;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +45,8 @@ public class MyBatisFlexConfig implements MyBatisFlexCustomizer {
     public void customize(FlexGlobalConfig flexGlobalConfig) {
         flexGlobalConfig.registerInsertListener(insertListener(), BaseEntity.class);
         flexGlobalConfig.registerUpdateListener(updateListener(), BaseEntity.class);
+
+        LogicDeleteManager.setProcessor(new BooleanLogicDeleteProcessor());
     }
 
     private InsertListener insertListener() {
