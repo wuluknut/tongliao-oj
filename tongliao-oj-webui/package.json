@@ -1,7 +1,7 @@
 {
   "name": "tongliao-oj-webui",
   "author": "Wulu Knut <wuluknut@gmail.com>",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "基于 Java 的高校内网 Online Judge 系统设计与实现",
   "homepage": "https://github.com/wuluknut/tongliao-oj",
   "private": true,
