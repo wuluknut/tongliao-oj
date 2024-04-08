@@ -17,9 +17,13 @@
 
 package com.wuluknut.tongliaooj.module.code.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.mybatisflex.core.BaseMapper;
 import com.wuluknut.tongliaooj.module.code.model.ProblemDO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 问题 Mapper 接口
@@ -29,4 +33,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ProblemMapper extends BaseMapper<ProblemDO> {
+
+    List<ProblemDO> listByContestId(@Param("id") Long id);
 }

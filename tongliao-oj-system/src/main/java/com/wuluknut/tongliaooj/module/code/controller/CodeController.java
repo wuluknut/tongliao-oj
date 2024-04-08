@@ -29,12 +29,17 @@ import com.wuluknut.tongliaooj.module.judge.service.JudgeService;
 import com.wuluknut.tongliaooj.module.judge.service.ScoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static com.wuluknut.tongliaooj.module.code.model.table.ContestDOTableDef.CONTEST_D_O;
 import static com.wuluknut.tongliaooj.module.code.model.table.ProblemDOTableDef.PROBLEM_D_O;
@@ -63,6 +68,30 @@ public class CodeController {
     @PreAuthorize("isAuthenticated()")
     public Page<ContestDO> list(@RequestParam(defaultValue = "1") Integer page) {
         return contestService.page(new Page<>(page, 10), QueryWrapper.create().orderBy(CONTEST_D_O.STOP_TIME.desc()));
+    }
+
+    @GetMapping("/contest/info")
+    @PreAuthorize("isAuthenticated()")
+    public List<ProblemDO> info(@Valid @NotNull Long id, Authentication authentication) {
+        if (contestService.getById(id).getStopTime().isBefore(LocalDateTime.now()) || scoreService.getOne(QueryWrapper.create().where(SCORE_D_O.CREATE_BY.eq(authentication.getName())).and(SCORE_D_O.CID.eq(id))) != null) {
+            return Collections.emptyList();
+        }
+
+        return problemService.findAllByContestId(id);
+    }
+
+    @GetMapping("/contest/score")
+    @PreAuthorize("isAuthenticated()")
+    public List<ScoreDO> score(@Valid @NotNull Long id) {
+        return scoreService.list(QueryWrapper.create().where(SCORE_D_O.CID.eq(id)).orderBy(SCORE_D_O.RESULT.desc()));
+    }
+
+    @PostMapping("/contest/submit")
+    @PreAuthorize("isAuthenticated()")
+    public void submit(@Valid @NotNull Long id, @Valid @NotNull Long[] scores, Authentication authentication) {
+        if (scoreService.getOne(QueryWrapper.create().where(SCORE_D_O.CREATE_BY.eq(authentication.getName())).and(SCORE_D_O.CID.eq(id))) == null) {
+            scoreService.save(ScoreDO.builder().cid(id).status(3).code("none").time("none").memory("none").result(scoreService.listByIds(Arrays.asList(scores)).stream().mapToInt(ScoreDO::getResult).sum()).build());
+        }
     }
 
     @GetMapping("/problem")

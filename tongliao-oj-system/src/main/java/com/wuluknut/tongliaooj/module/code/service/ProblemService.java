@@ -23,6 +23,8 @@ import com.wuluknut.tongliaooj.module.code.mapper.ProblemMapper;
 import com.wuluknut.tongliaooj.module.code.model.ProblemDO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 问题服务类
  *
@@ -31,4 +33,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProblemService extends ServiceImpl<ProblemMapper, ProblemDO> implements IService<ProblemDO> {
+
+    public List<ProblemDO> findAllByContestId(Long id) {
+        return mapper.listByContestId(id);
+    }
 }
