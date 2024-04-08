@@ -10,27 +10,29 @@ const lang = ref('')
 const code = defineModel({ default: '' })
 
 watch(() => props.code, () => {
-  switch (props.lang) {
-    case 54:
-      lang.value = 'cpp'
-      code.value = `class Solution {\npublic:\n\t${props.code} {\n\n\t}\n};\n`
-      break
-    case 62:
-      lang.value = 'java'
-      code.value = `class Solution {\n\t${props.code} {\n\n\t}\n}\n`
-      break
-    case 63:
-      lang.value = 'javascript'
-      code.value = `${props.code} {\n\n}\n`
-      break
-    case 71:
-      lang.value = 'python'
-      code.value = `class Solution(object):\n\t${props.code}\n\t\tpass`
-      break
-    case 82:
-      lang.value = 'sql'
-      code.value = `${props.code}`
-      break
+  if (code.value === '') {
+    switch (props.lang) {
+      case 54:
+        lang.value = 'cpp'
+        code.value = `class Solution {\npublic:\n\t${props.code} {\n\n\t}\n};\n`
+        break
+      case 62:
+        lang.value = 'java'
+        code.value = `class Solution {\n\t${props.code} {\n\n\t}\n}\n`
+        break
+      case 63:
+        lang.value = 'javascript'
+        code.value = `${props.code} {\n\n}\n`
+        break
+      case 71:
+        lang.value = 'python'
+        code.value = `class Solution(object):\n\t${props.code}\n\t\tpass`
+        break
+      case 82:
+        lang.value = 'sql'
+        code.value = `${props.code}`
+        break
+    }
   }
 })
 
