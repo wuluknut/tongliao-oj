@@ -7,12 +7,13 @@
 # Node dependencies
 node_modules
 
-# Nuxt dev/build outputs
+# dev/build outputs
 .output
-.data
-.nuxt
 .nitro
+.nuxt
+.data
 .cache
+
 dist
 
 # Local env files
